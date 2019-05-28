@@ -3,10 +3,7 @@ package server.Authentication;
 		import TLS_Utils.TLSConfiguration;
 		import TLS_Utils.TLSServerCreate;
 
-		import java.io.BufferedReader;
-		import java.io.FileInputStream;
-		import java.io.IOException;
-		import java.io.InputStreamReader;
+		import java.io.*;
 		import java.util.Properties;
 
 		import javax.net.ssl.SSLSocket;
@@ -31,9 +28,16 @@ public class AuthenticationServer {
 		return new TLSConfiguration(properties.getProperty("TLS-PROT-ENF"),properties.getProperty("TLS-AUTH"),properties.getProperty("CIPHERSUITES").split(";"),"authentication.jks","authenticationTruststore.jks");
 	}
 
+	private static byte[] receiveMessage(SSLSocket socket) throws IOException {
+		DataInputStream stream = (DataInputStream) socket.getInputStream();
+		byte[] buf = new byte[stream.available()];
+		stream.readFully(buf);
+		return buf;
+	}
+
 	private static void receiveCommunication(SSLSocket socket) throws IOException {
 		BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-		String line;
+		String line;//System.out.println(new String(receiveMessage(socket)));
 		while (((line = in.readLine()) != null)) {
 			System.out.println(line);
 		}
