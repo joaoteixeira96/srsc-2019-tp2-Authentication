@@ -10,7 +10,7 @@ public class AuthenticationAPI {
 
 	private static final String NOT_AUTHENTICATED = "Not Authenticated";
 	private static final String AUTHENTICATED = "Authenticated";
-	private static final String filePath = "src/server/Authentication/authenticationFile";
+	private static final String filePath = "src/server/Authentication/authentication";
 	Dictionary<String, User> usersDictionary = new Hashtable<>();
 
 	public static boolean login(String username, String password, Dictionary<String, User> users) { // TODO: take Static

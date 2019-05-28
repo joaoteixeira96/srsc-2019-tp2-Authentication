@@ -29,17 +29,15 @@ public class MainDispatcherHandler {
         out.println(message);
         out.println();
         out.flush();
-        out.close();
     }
 
     private  String receiveMessage() throws IOException {
 		BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 		String message = in.readLine();
-		in.close();
 		return message;
 	}
-    private String login(String message) throws FileNotFoundException {
-    	String [] messageArgs = message.split(DIVIDER);
+    public static String login(String message) throws FileNotFoundException {
+    	String [] messageArgs = message.trim().split(DIVIDER);
 		return AuthenticationAPI.login(messageArgs[0], messageArgs[1]);
     	
     }
