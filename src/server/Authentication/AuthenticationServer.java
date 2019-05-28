@@ -1,4 +1,4 @@
-package server.MainDispatcher;
+package server.Authentication;
 
 		import TLS_Utils.TLSConfiguration;
 		import TLS_Utils.TLSServerCreate;
@@ -28,7 +28,7 @@ public class AuthenticationServer {
 		FileInputStream inputStream = new FileInputStream("servertls.conf");
 		Properties properties = new Properties();
 		properties.load(inputStream);
-		return new TLSConfiguration(properties.getProperty("TLS-PROT-ENF"),properties.getProperty("TLS-AUTH"),properties.getProperty("CIPHERSUITES").split(";"),"server.jks","serverTruststore.jks");
+		return new TLSConfiguration(properties.getProperty("TLS-PROT-ENF"),properties.getProperty("TLS-AUTH"),properties.getProperty("CIPHERSUITES").split(";"),"authentication.jks","authenticationTruststore.jks");
 	}
 
 	private static void receiveCommunication(SSLSocket socket) throws IOException {
