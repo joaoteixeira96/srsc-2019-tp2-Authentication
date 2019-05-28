@@ -10,7 +10,7 @@ package server.Authentication;
 
 public class AuthenticationServer {
 
-	private static final int PORT = 8081;
+	private static final int PORT = 8082;
 
 	public static void main(String[] args) throws Exception {
 
@@ -26,13 +26,6 @@ public class AuthenticationServer {
 		Properties properties = new Properties();
 		properties.load(inputStream);
 		return new TLSConfiguration(properties.getProperty("TLS-PROT-ENF"),properties.getProperty("TLS-AUTH"),properties.getProperty("CIPHERSUITES").split(";"),"authentication.jks","authenticationTruststore.jks");
-	}
-
-	private static byte[] receiveMessage(SSLSocket socket) throws IOException {
-		DataInputStream stream = (DataInputStream) socket.getInputStream();
-		byte[] buf = new byte[stream.available()];
-		stream.readFully(buf);
-		return buf;
 	}
 
 	private static void receiveCommunication(SSLSocket socket) throws IOException {

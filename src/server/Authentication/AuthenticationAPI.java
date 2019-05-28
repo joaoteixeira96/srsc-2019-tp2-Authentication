@@ -8,6 +8,8 @@ import java.util.Scanner;
 
 public class AuthenticationAPI {
 
+	private static final String NOT_AUTHENTICATED = "Not Authenticated";
+	private static final String AUTHENTICATED = "Authenticated";
 	private static final String filePath = "src/server/Authentication/authenticationFile";
 	Dictionary<String, User> usersDictionary = new Hashtable<>();
 
@@ -16,7 +18,7 @@ public class AuthenticationAPI {
 	}
 
 	// Search user in local file and verify if he can login
-	public static boolean login(String username, String password) throws FileNotFoundException {
+	public static String login(String username, String password) throws FileNotFoundException {
 		File file = new File(filePath);
 		Scanner sc = new Scanner(file);
 		try {
@@ -24,14 +26,14 @@ public class AuthenticationAPI {
 				String[] readLine = sc.nextLine().split(" ");
 				if (readLine[0].equals(username) && readLine[1].equals(password)) {
 					sc.close();
-					return true;
+					return AUTHENTICATED;
 				}
 			}
 		} catch (Exception e) {
 			System.out.println(AuthenticationAPI.class + " user not found");
 		}
 		sc.close();
-		return false;
+		return NOT_AUTHENTICATED;
 
 	}
 

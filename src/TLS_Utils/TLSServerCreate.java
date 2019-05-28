@@ -64,8 +64,8 @@ public class TLSServerCreate {
 
     private static void printServerSocketInfo(SSLServerSocket s) {
         System.out.println("Server socket class: " + s.getClass());
-        System.out.println("   Socker address = " + s.getInetAddress().toString());
-        System.out.println("   Socker port = " + s.getLocalPort());
+        System.out.println("   Socket address = " + s.getInetAddress().toString());
+        System.out.println("   Socket port = " + s.getLocalPort());
         System.out.println("   Need client authentication = " + s.getNeedClientAuth());
         System.out.println("   Want client authentication = " + s.getWantClientAuth());
         System.out.println("   Use client mode = " + s.getUseClientMode());
