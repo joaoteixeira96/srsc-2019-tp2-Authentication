@@ -1,57 +1,44 @@
-package server.Authentication;
+package server.MainDispatcher;
 
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.InputStreamReader;
-import java.net.ServerSocket;
-import java.security.KeyStore;
+		import TLS_Utils.TLSConfiguration;
+		import TLS_Utils.TLSServerCreate;
 
-import javax.net.ssl.KeyManager;
-import javax.net.ssl.KeyManagerFactory;
-import javax.net.ssl.SSLContext;
-import javax.net.ssl.SSLServerSocket;
-import javax.net.ssl.SSLServerSocketFactory;
-import javax.net.ssl.SSLSocket;
+		import java.io.BufferedReader;
+		import java.io.FileInputStream;
+		import java.io.IOException;
+		import java.io.InputStreamReader;
+		import java.util.Properties;
+
+		import javax.net.ssl.SSLSocket;
 
 public class AuthenticationServer {
 
 	private static final int PORT = 8081;
 
-	private MainDispatcherHandler handler;
-
-	public AuthenticationServer() {
-		this.handler = new MainDispatcherHandler();
-	}
-
 	public static void main(String[] args) throws Exception {
 
-		System.setProperty("javax.net.ssl.trustStore", "serverTruststore.jks");
-		System.setProperty("javax.net.ssl.trustStorePassword", "password");
 
-		char[] passphrase = "password".toCharArray();
-		KeyStore keystore = KeyStore.getInstance("JKS");
-		keystore.load(new FileInputStream("server.jks"), passphrase);
-		KeyManagerFactory kmf = KeyManagerFactory.getInstance("SunX509");
-		kmf.init(keystore, passphrase);
-		SSLContext context = SSLContext.getInstance("TLS");
-		KeyManager[] keyManagers = kmf.getKeyManagers();
+		SSLSocket socket = (SSLSocket) TLSServerCreate.createSSLServer(getConfiguration(),"password".toCharArray(),PORT).accept();
+		receiveCommunication(socket);
 
-		context.init(keyManagers, null, null);
+		socket.close();
+	}
 
-		SSLServerSocketFactory ssf = context.getServerSocketFactory();
-		ServerSocket ss = ssf.createServerSocket(PORT);
+	private static TLSConfiguration getConfiguration() throws IOException {
+		FileInputStream inputStream = new FileInputStream("servertls.conf");
+		Properties properties = new Properties();
+		properties.load(inputStream);
+		return new TLSConfiguration(properties.getProperty("TLS-PROT-ENF"),properties.getProperty("TLS-AUTH"),properties.getProperty("CIPHERSUITES").split(";"),"server.jks","serverTruststore.jks");
+	}
 
-		// SSLSocketwith mutual authentication
-		((SSLServerSocket) ss).setNeedClientAuth(true);
-
-		SSLSocket s = (SSLSocket) ss.accept();
-
-		BufferedReader in = new BufferedReader(new InputStreamReader(s.getInputStream()));
-		String line = "";
+	private static void receiveCommunication(SSLSocket socket) throws IOException {
+		BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+		String line;
 		while (((line = in.readLine()) != null)) {
 			System.out.println(line);
 		}
 		in.close();
-		s.close();
 	}
+
+
 }
