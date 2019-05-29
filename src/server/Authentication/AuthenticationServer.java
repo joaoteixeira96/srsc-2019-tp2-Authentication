@@ -16,9 +16,8 @@ public class AuthenticationServer {
 
 
 		SSLSocket socket = (SSLSocket) TLSServerCreate.createSSLServer(getConfiguration(),"password".toCharArray(),PORT).accept();
-		receiveCommunication(socket);
-		receiveCommunication(socket);
-		socket.close();
+		while(true)
+			receiveCommunication(socket);
 	}
 
 	private static TLSConfiguration getConfiguration() throws IOException {
