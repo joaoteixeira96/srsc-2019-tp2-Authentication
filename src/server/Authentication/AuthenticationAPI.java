@@ -22,19 +22,20 @@ public class AuthenticationAPI {
 		File file = new File(filePath);
 		Scanner sc = new Scanner(file);
 		try {
-			while (sc.hasNextLine()) {
-				String[] readLine = sc.nextLine().split(" ");
-				if (readLine[0].equals(username) && readLine[1].equals(password)) {
+			while (sc.hasNextLine()) 
+				if (credentialsMatch(sc.nextLine().split(" "), username, password)) {
 					sc.close();
 					return AUTHENTICATED;
 				}
-			}
 		} catch (Exception e) {
 			System.out.println(AuthenticationAPI.class + " user not found");
 		}
 		sc.close();
 		return NOT_AUTHENTICATED;
-
+	}
+	
+	private static boolean credentialsMatch(String[] line, String username, String password) {
+		return line[0].equals(username) && line[1].equals(password);
 	}
 
 	public static void main(String args[]) throws Exception {

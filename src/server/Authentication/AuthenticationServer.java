@@ -13,11 +13,13 @@ public class AuthenticationServer {
 	private static final int PORT = 8083;
 
 	public static void main(String[] args) throws Exception {
-
-
-		SSLSocket socket = (SSLSocket) TLSServerCreate.createSSLServer(getConfiguration(),"password".toCharArray(),PORT).accept();
+		mainCycle();
+	}
+	
+	private static void mainCycle() throws Exception{
 		while(true)
-			receiveCommunication(socket);
+			receiveCommunication((SSLSocket) TLSServerCreate.createSSLServer(getConfiguration(),"password".toCharArray(),PORT).accept());
+	
 	}
 
 	private static TLSConfiguration getConfiguration() throws IOException {
@@ -33,7 +35,8 @@ public class AuthenticationServer {
         out.println();
         out.flush();
     }
-	private static void receiveCommunication(SSLSocket socket) throws IOException {
+    
+	private static void receiveCommunication(SSLSocket socket) throws Exception {
 		BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 		sendMessage(MainDispatcherHandler.login(in.readLine()), socket);
 
