@@ -15,8 +15,12 @@ public class AuthenticationServer {
 
 	public static void main(String[] args) throws Exception {
 		SSLServerSocket serverSocket = TLSServerCreate.createSSLServer(getConfiguration(),"password".toCharArray(),PORT);
-		while(true)
+		while(true) 
+			try {
 			mainFlow((SSLSocket) serverSocket.accept());
+			} catch (Exception e) {
+				System.out.println("Connection Crashed");
+			}
 	}
 	
 	private static void mainFlow(SSLSocket socket) throws Exception{
