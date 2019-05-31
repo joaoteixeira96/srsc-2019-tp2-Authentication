@@ -20,9 +20,7 @@ public class AuthenticationServer {
 	}
 	
 	private static void mainFlow(SSLSocket socket) throws Exception{
-		PrintWriter out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(socket.getOutputStream())));
-		BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-		sendMessage(MainDispatcherHandler.login(receiveCommunication(in)), out);
+		(new  MainDispatcherHandler(socket)).login();
 	}
 
 	private static TLSConfiguration getConfiguration() throws IOException {
@@ -32,17 +30,6 @@ public class AuthenticationServer {
 		return new TLSConfiguration(properties.getProperty("TLS-PROT-ENF"),properties.getProperty("TLS-AUTH"),properties.getProperty("CIPHERSUITES").split(";"),"authentication.jks","authenticationTruststore.jks");
 	}
 	
-    private static void sendMessage(String message, PrintWriter out) throws IOException {
-    	System.out.println("Message sent :" + message);
-        out.println(message);
-        out.flush();
-    }
     
-	private static String receiveCommunication(BufferedReader in) throws Exception {
-		String message = in.readLine();
-		System.out.println("Received message :" +message);
-		return message;
-		
-	}
 
 }

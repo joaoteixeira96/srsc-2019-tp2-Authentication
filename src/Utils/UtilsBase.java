@@ -29,6 +29,8 @@ public class UtilsBase
         
         return buf.toString();
     }
+   
+   
     
     /**
      * Retorna dados passados como byte array numa string hexadecimal
