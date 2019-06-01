@@ -21,6 +21,6 @@ public class Token1024{
         	Date current = new Date();
         	Date expires = dateFormat.parse(EXPIRE_DATE);
         	
-            return  random + DIVIDER+dateFormat.format(current) +DIVIDER+ dateFormat.format(expires);
+            return  dateFormat.format(current) +DIVIDER+ dateFormat.format(expires);
     }
 }

@@ -123,6 +123,7 @@ public class AuthenticationAPI {
 			ByteArrayOutputStream outputStream = new ByteArrayOutputStream( );
 			outputStream.write( digitalSignature);
 			outputStream.write( (DIVIDER+nonceC).getBytes(UTF_8));
+			outputStream.write( (DIVIDER+ signature).getBytes(UTF_8));
 			byte messageToEncrypt[] = outputStream.toByteArray();
 			
 			byte [] encryptedMessage = genericBlockCipher.encrypt(messageToEncrypt,ks);
