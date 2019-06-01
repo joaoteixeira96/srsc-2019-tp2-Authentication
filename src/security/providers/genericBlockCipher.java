@@ -1,4 +1,4 @@
-package security.config;
+package security.providers;
 
 
 import java.io.FileInputStream;
