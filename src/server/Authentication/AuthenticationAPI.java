@@ -152,21 +152,4 @@ public class AuthenticationAPI {
 		return null;
 	}
 
-	public static void main(String args[]) throws Exception {
-		Dictionary<String, User> users = new Hashtable<>();
-
-		users.put("Deus", new User("Deus", "aaa"));
-		users.put("Hitler", new User("Deus", "bbb"));
-		users.put("Conan Osiris", new User("Deus", "cc"));
-		users.put("Batista", new User("Deus", "ddd"));
-		users.put("Julio", new User("Deus", "eee"));
-		System.out.println(login("Deus", "aaa", users));
-		System.out.println(login("Deus", "bbb", users));
-
-		String testUser = "Deus";
-		String testUserPassword = "aaa";
-
-//		System.out.println("User: " + testUser + " with password: " + testUserPassword + " authenticated?: "
-//				+ login(testUser, testUserPassword));
-	}
 }

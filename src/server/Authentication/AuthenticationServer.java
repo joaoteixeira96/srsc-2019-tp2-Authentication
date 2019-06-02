@@ -25,6 +25,7 @@ public class AuthenticationServer {
 	
 	private static void mainFlow(SSLSocket socket) throws Exception{
 		(new  MainDispatcherHandler(socket)).login();
+		socket.close();
 	}
 
 	private static TLSConfiguration getConfiguration() throws IOException {

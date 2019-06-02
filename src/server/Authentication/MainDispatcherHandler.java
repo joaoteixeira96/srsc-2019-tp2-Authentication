@@ -26,13 +26,16 @@ public class MainDispatcherHandler {
     	out.close();
     	in.close();
     }
-  //TODO : do this
+
     public  void login() throws Exception {
     	AuthenticationAPI authenticationAPI = new AuthenticationAPI();
     	String username = receiveCommunication();
-    	if(!authenticationAPI.checkUsername(username)) {sendMessage(NOT_AUTHENTICATED);}
+    	if(!authenticationAPI.checkUsername(username)) {
+    		sendMessage(NOT_AUTHENTICATED); 
+    		return;
+    	}
     	sendMessage(authenticationAPI.sendChallenge());
-    	sendMessage(authenticationAPI.challangeResponse(receiveCommunication()));
+    	sendMessage(authenticationAPI.challangeResponse(receiveCommunication())); 
     }
     private static void sendMessage(String message) throws IOException {
     	System.out.println("Message sent :" + message);
