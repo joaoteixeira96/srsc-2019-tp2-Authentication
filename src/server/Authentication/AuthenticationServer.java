@@ -17,8 +17,9 @@ public class AuthenticationServer {
 		SSLServerSocket serverSocket = TLSServerCreate.createSSLServer(getConfiguration(),"password".toCharArray(),PORT);
 		while(true) 
 			try {
-			mainFlow((SSLSocket) serverSocket.accept());
+				mainFlow((SSLSocket) serverSocket.accept());
 			} catch (Exception e) {
+				e.printStackTrace();
 				System.out.println("Connection Crashed");
 			}
 	}
