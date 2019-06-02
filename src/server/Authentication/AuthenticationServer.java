@@ -17,7 +17,22 @@ public class AuthenticationServer {
 		SSLServerSocket serverSocket = TLSServerCreate.createSSLServer(getConfiguration(),"password".toCharArray(),PORT);
 		while(true) 
 			try {
-				mainFlow((SSLSocket) serverSocket.accept());
+				final SSLSocket socket = (SSLSocket) serverSocket.accept();
+				new Thread(new Runnable() {
+				    private SSLSocket socket;
+				    public Runnable init(SSLSocket socket) {
+				        this.socket = socket;
+				        return this;
+				    }
+				    @Override
+				    public void run() {
+				    	try {
+							mainFlow(this.socket);
+						} catch (Exception e) {
+							System.out.println("Socket crashed");
+						}
+				    }
+				}.init(socket)).start();
 			} catch (Exception e) {
 				e.printStackTrace();
 				System.out.println("Connection Crashed");
