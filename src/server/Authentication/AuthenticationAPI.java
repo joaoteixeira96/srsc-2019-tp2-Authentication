@@ -2,44 +2,20 @@ package server.Authentication;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.security.InvalidAlgorithmParameterException;
-import java.security.InvalidKeyException;
-import java.security.KeyStoreException;
-import java.security.NoSuchAlgorithmException;
-import java.security.NoSuchProviderException;
 import java.security.SecureRandom;
-import java.security.SignatureException;
-import java.security.UnrecoverableKeyException;
-import java.security.cert.CertificateException;
-import java.security.spec.InvalidKeySpecException;
-import java.text.ParseException;
-import java.util.Arrays;
 import java.util.Base64;
 import java.util.Base64.Decoder;
 import java.util.Base64.Encoder;
 import java.util.Dictionary;
 import java.util.Hashtable;
-import java.util.Random;
 import java.util.Scanner;
 
-import javax.crypto.BadPaddingException;
-import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.NoSuchPaddingException;
-import javax.crypto.ShortBufferException;
-
-import org.omg.PortableInterceptor.DISCARDING;
-
-import Utils.UtilsBase;
 import security.providers.DHProvider;
 import security.providers.PKCS1Signature;
 import security.providers.RetrieveInfoFromKeystore;
 import security.providers.SHA256;
 import security.providers.Token1024;
 import security.providers.genericBlockCipher;
-import sun.nio.cs.ext.PCK;
 
 public class AuthenticationAPI {
 
@@ -50,7 +26,6 @@ public class AuthenticationAPI {
 	private static final String IDENTIFIER = "AuthenticationServer";
 	private static final String DIVIDER = " ";
 	private static final String NOT_AUTHENTICATED = "Not Authenticated";
-	private static final String AUTHENTICATED = "Authenticated";
 	private static final String filePath = "src/server/Authentication/authentication";
 	private String currentNonceA;
 	Dictionary<String, User> usersDictionary = new Hashtable<>();

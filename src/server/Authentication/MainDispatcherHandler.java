@@ -11,11 +11,9 @@ import javax.net.ssl.SSLSocket;
 
 public class MainDispatcherHandler {
 
-	private static final String DIVIDER = " ";
     private static PrintWriter out;
     private static BufferedReader in;
 	private static final String NOT_AUTHENTICATED = "Not Authenticated";
-	private static final String AUTHENTICATED = "Authenticated";
     
     public MainDispatcherHandler(SSLSocket socket) throws IOException{
         out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(socket.getOutputStream())));
