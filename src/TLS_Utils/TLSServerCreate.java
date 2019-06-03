@@ -44,7 +44,7 @@ public class TLSServerCreate {
             socket.setNeedClientAuth(true);
         String[] enabledProtocols = { configuration.getTls() };
         socket.setEnabledProtocols(enabledProtocols);
-        //socket.setEnabledCipherSuites(configuration.getCiphersuites());
+        socket.setEnabledCipherSuites(configuration.getCiphersuites());
         return socket;
     }
 

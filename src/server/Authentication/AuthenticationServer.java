@@ -29,6 +29,7 @@ public class AuthenticationServer {
 				    	try {
 							mainFlow(this.socket);
 						} catch (Exception e) {
+							e.printStackTrace();
 							System.out.println("Socket crashed");
 						}
 				    }
