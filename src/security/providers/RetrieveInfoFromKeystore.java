@@ -67,16 +67,13 @@ public class RetrieveInfoFromKeystore {
 		Key key = keystore.getKey(alias, PASSWORD);
 		KeyPair kp = null;
 		PublicKey publicKey = null;
-		if (key instanceof PrivateKey) {
+		if (key instanceof PublicKey) {
 
 		    // Retornar certificado da chave publica da entry
 		    Certificate cert = keystore.getCertificate(alias);
 
 		    // Obter chave Publica da entry
 		    publicKey = cert.getPublicKey();
-
-		    // Retornar o par de chaves da entry
-		    kp = new KeyPair(publicKey, (PrivateKey) key);
 
 		}
 		else System.out.println("Not instance of Private Key ...");
