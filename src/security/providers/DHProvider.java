@@ -37,20 +37,20 @@ public class DHProvider {
 	private DHParameterSpec dhParams;
 	public DHProvider() throws InvalidAlgorithmParameterException, NoSuchAlgorithmException, NoSuchProviderException {
 		dhParams = new DHParameterSpec(p512, g512); 
-		keyGen = KeyPairGenerator.getInstance("DH", "BC");
+		keyGen = KeyPairGenerator.getInstance("DH");
 	        keyGen.initialize(dhParams);
 	        keyPair = keyGen.generateKeyPair();
 	}
 	public  byte[] getSharedKey(byte[] pubKey) throws NoSuchAlgorithmException, NoSuchProviderException, InvalidAlgorithmParameterException, InvalidKeyException, InvalidKeySpecException {
 		
-        KeyAgreement aKeyAgree = KeyAgreement.getInstance("DH", "BC");
+        KeyAgreement aKeyAgree = KeyAgreement.getInstance("DH");
        
         aKeyAgree.init(keyPair.getPrivate());
         
         PublicKey publicKeyb = 
-        	   KeyFactory.getInstance("DiffieHellman", "BC").generatePublic(new X509EncodedKeySpec(pubKey));
+        	   KeyFactory.getInstance("DiffieHellman").generatePublic(new X509EncodedKeySpec(pubKey));
         aKeyAgree.doPhase(publicKeyb, true);
-        MessageDigest	hash = MessageDigest.getInstance("SHA256", "BC");
+        MessageDigest	hash = MessageDigest.getInstance("sha-256");
         byte[] aShared = hash.digest(aKeyAgree.generateSecret());
         return aShared;
 	}

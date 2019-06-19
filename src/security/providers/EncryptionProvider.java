@@ -49,7 +49,7 @@ public class EncryptionProvider {
 	public static final String CRYPTO_PROVIDER_TOKEN = "PROVIDER";
 
 	// other constatns
-	public static final String DEFAULT_SECURITY_PROVIDER = "BC";
+	public static final String DEFAULT_SECURITY_PROVIDER = "SunJSSE";
 
 	public static final String CIPHER_ECB_MODE = "ECB";
 	public static final String CIPHER_CBC_MODE = "CBC";

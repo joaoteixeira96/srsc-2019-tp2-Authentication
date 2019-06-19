@@ -26,7 +26,7 @@ public class AuthenticationAPI {
 	private static final String IDENTIFIER = "AuthenticationServer";
 	private static final String DIVIDER = " ";
 	private static final String NOT_AUTHENTICATED = "Not Authenticated";
-	private static final String filePath = "src/server/Authentication/authentication";
+	private static final String filePath = "authentication";
 	private String currentNonceA;
 	Dictionary<String, User> usersDictionary = new Hashtable<>();
 	private static DHProvider hdprovider;
@@ -42,6 +42,7 @@ public class AuthenticationAPI {
 				currentUser = username;
 				return true;
 			}
+			System.out.println("User not in Authentication DB");
 			return false ;
 	}
 

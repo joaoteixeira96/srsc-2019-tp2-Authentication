@@ -11,6 +11,7 @@ import javax.net.ssl.SSLSocket;
 
 public class AuthenticationServer {
 
+	private static final String SERVERTLS_CONF = "servertls.conf";
 	private static final int PORT = 8083;
 
 	public static void main(String[] args) throws Exception {
@@ -46,7 +47,7 @@ public class AuthenticationServer {
 	}
 
 	private static TLSConfiguration getConfiguration() throws IOException {
-		FileInputStream inputStream = new FileInputStream("servertls.conf");
+		FileInputStream inputStream = new FileInputStream(SERVERTLS_CONF);
 		Properties properties = new Properties();
 		properties.load(inputStream);
 		return new TLSConfiguration(properties.getProperty("TLS-PROT-ENF"),properties.getProperty("TLS-AUTH"),properties.getProperty("CIPHERSUITES").split(";"),"authentication.jks","authenticationTruststore.jks");

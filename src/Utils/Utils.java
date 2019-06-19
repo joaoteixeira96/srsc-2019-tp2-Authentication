@@ -29,7 +29,7 @@ public class Utils
         SecureRandom random)
         throws NoSuchAlgorithmException, NoSuchProviderException
     {
-        KeyGenerator generator = KeyGenerator.getInstance("AES", "BC");
+        KeyGenerator generator = KeyGenerator.getInstance("AES");
         
         generator.init(256, random);
         
