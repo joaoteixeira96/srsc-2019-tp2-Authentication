@@ -66,7 +66,7 @@ public class AuthenticationAPI {
 		byte[] pubKeyCBytes = DECODER.decode(pubKeyC);
 		byte[] sharedKey= hdprovider.getSharedKey(pubKeyCBytes);
 		String sharedKeyToString = ENCODER.encodeToString(sharedKey);
-		// DH returns shared of 1024 bitskey and a AES only supports 256 bits so we make a SHA to output 256 bits
+		// DH returns shared key of 1024 bits and a AES only supports 256 bits so we make a SHA of the shared key to output 256 bits
 		byte[] ks = SHA256.generateHash(sharedKeyToString); 
 		byte[] encryptedMessage = DECODER.decode(encryptedPWDNonceA);
 		System.out.println(encryptedMessage);

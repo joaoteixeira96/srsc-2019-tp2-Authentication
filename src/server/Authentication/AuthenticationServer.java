@@ -11,11 +11,14 @@ import javax.net.ssl.SSLSocket;
 
 public class AuthenticationServer {
 
+	private static final String AUTHENTICATION_TRUSTSTORE_JKS = "authenticationTruststore.jks";
+	private static final String AUTHENTICATION_JKS = "authentication.jks";
+	private static final char[] PASSWORD = "password".toCharArray();
 	private static final String SERVERTLS_CONF = "servertls.conf";
 	private static final int PORT = 8083;
 
 	public static void main(String[] args) throws Exception {
-		SSLServerSocket serverSocket = TLSServerCreate.createSSLServer(getConfiguration(),"password".toCharArray(),PORT);
+		SSLServerSocket serverSocket = TLSServerCreate.createSSLServer(getConfiguration(),PASSWORD,PORT);
 		while(true) 
 			try {
 				final SSLSocket socket = (SSLSocket) serverSocket.accept();
@@ -50,7 +53,7 @@ public class AuthenticationServer {
 		FileInputStream inputStream = new FileInputStream(SERVERTLS_CONF);
 		Properties properties = new Properties();
 		properties.load(inputStream);
-		return new TLSConfiguration(properties.getProperty("TLS-PROT-ENF"),properties.getProperty("TLS-AUTH"),properties.getProperty("CIPHERSUITES").split(";"),"authentication.jks","authenticationTruststore.jks");
+		return new TLSConfiguration(properties.getProperty("TLS-PROT-ENF"),properties.getProperty("TLS-AUTH"),properties.getProperty("CIPHERSUITES").split(";"),AUTHENTICATION_JKS,AUTHENTICATION_TRUSTSTORE_JKS);
 	}
 	
     

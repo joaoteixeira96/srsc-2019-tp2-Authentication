@@ -65,7 +65,6 @@ public class RetrieveInfoFromKeystore {
 	    // Obter chave privada
 	
 		Key key = keystore.getKey(alias, PASSWORD);
-		KeyPair kp = null;
 		PublicKey publicKey = null;
 		if (key instanceof PublicKey) {
 
