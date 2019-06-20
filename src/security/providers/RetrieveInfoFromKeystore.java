@@ -76,7 +76,7 @@ public class RetrieveInfoFromKeystore {
 		    publicKey = cert.getPublicKey();
 
 		}
-		else System.out.println("Not instance of Private Key ...");
+		else System.out.println("Not instance of Public Key ...");
 		return publicKey;
 	}
 	
